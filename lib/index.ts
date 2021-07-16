@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import {
+  ConsoleLogger,
   DynamicModule,
   Global,
   Inject,
   Injectable,
-  Logger,
   Module,
   ModuleMetadata,
   OnApplicationShutdown,
@@ -40,13 +40,13 @@ export interface NestMysql2AsyncOptions
 
 @Injectable()
 class NestMysql2Service {
-  private readonly logger: Logger;
+  private readonly logger: ConsoleLogger;
   private pool: Pool;
   constructor(
     @Inject(NEST_MYSQL2_OPTIONS)
     private _NestMysql2Options: NestMysql2Options,
   ) {
-    this.logger = new Logger('NestMysql2Service');
+    this.logger = new ConsoleLogger('NestMysql2Service');
     this.logger.setContext('MySQL');
   }
   async getPool() {
